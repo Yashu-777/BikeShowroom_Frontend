@@ -1,26 +1,29 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // Use Routes here
-
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import BikeList from './components/BikeList';
-import BikeDetails from './components/BikeDetails';
+import BikeDetailsPage from './components/BikeDetailsPage';
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import Payment from './components/Payment';
+import { AuthProvider } from './context/AuthContext'; // Import AuthProvider
 
 function App() {
   return (
     <Router>
       <>
-        <NavBar />
-        <Routes> {/* Use Routes instead of Route */}
-          <Route path="/" element={<BikeList />} />
-          <Route path="/bikes/:id" element={<BikeDetails />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          
-        </Routes> {/* Close Routes */}
-        <Footer />
+        <AuthProvider> {/* Wrap your routes with AuthProvider */}
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<BikeList />} />
+            <Route path="/bikes/:id" element={<BikeDetailsPage />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/payment" element={<Payment />} />
+          </Routes>
+          <Footer />
+        </AuthProvider>
       </>
     </Router>
   );

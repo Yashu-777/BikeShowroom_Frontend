@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+ 
   // Create a navigate function to programmatically navigate
   const navigate = useNavigate();
+  const {toggleAuth} = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,9 +23,14 @@ function Login() {
 
       if (response.status === 200) {
         console.log('Login successful!');
-        // You can navigate to another page here, e.g., the user's dashboard
-      }
-    } catch (error) {
+        
+        // Use toggleAuth with a callback to check the updated isAuthenticated value
+        toggleAuth();
+       // console.log(isAuthenticated); // This will log the updated value
+        navigate('/payment');
+        
+      } 
+    }catch (error) {
       console.error('Error during login:', error);
       // Handle login errors and provide user feedback, e.g., display an error message
     }

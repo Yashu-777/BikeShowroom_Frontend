@@ -20,6 +20,7 @@ function Signup() {
       if (response.status === 201) {
         console.log('Registration successful!');
         // You can navigate to another page here
+        navigate('/payment');
       }
     } catch (error) {
       console.error('Error during registration:', error);

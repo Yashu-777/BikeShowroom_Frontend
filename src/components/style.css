@@ -1,0 +1,275 @@
+.bg-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 50vh;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.col-md-3{
+    margin-bottom: 20px;
+}
+
+.navbar-brand{
+  margin-left: -50px;
+}
+
+/* Add these styles to your styles.css or BikeList component's CSS */
+
+.search-results-container {
+    flex-grow: 1; /* Ensure the results container takes up the full width */
+  }
+
+  .search-results {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+
+.search-results ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-results li {
+  padding: 5px;
+  cursor: pointer;
+}
+
+/* Add these styles to your CSS file */
+
+.search-container {
+  width: 35%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 100px;
+}
+
+.input-container {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  
+
+/* Style the search button */
+.search-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+/* .h2{
+  margin-left: 500px;
+  margin-bottom : 20px;
+} */
+
+/* You can add this CSS to your existing styles.css or create a new CSS file. */
+
+/* Style the color options buttons */
+.color-options {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.color-options button {
+  background-color: #007BFF; /* Default button background color */
+  color: #fff; /* Default text color */
+  border: none;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.color-options button.active {
+  background-color: #28A745; /* Active button background color */
+}
+
+
+
+
+
+/* Style the h2 element */
+/* h2 {
+  margin: 10px auto;
+} */
+
+
+.color-options {
+  display: flex;
+  justify-content: space-around;
+}
+
+.color-options button {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.color-options button.active {
+  background-color: #ccc;
+}
+
+
+.bike-image-container {
+  flex: 1; /* This takes up half of the page */
+  margin: 0 20px; /* Add margin for spacing */
+  
+}
+
+.bike-customization {
+  flex: 1;
+  text-align: left;
+}
+
+.color-options {
+  display: flex;
+  flex-direction: column;
+  width: 50px;
+  height: 300px;
+}
+
+/* Add styles as needed for the buttons and other elements */
+
+.bike-details-container {
+    /* height: 90vh; */
+  display: flex;
+  justify-content: center;
+ margin-top: 50px; 
+}
+
+
+
+.bike-column {
+  flex: 1; /* This takes up half of the page for bike image and buttons */
+  padding: 20px; /* Add padding for spacing */
+}
+
+.second-column {
+  flex: 1; /* This takes up the other half of the page */
+  /* You can add styling or content to this column as needed */
+}
+
+.product-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.product-table th, .product-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: start;
+}
+
+.product-table th {
+  background-color: #f2f2f2;
+}
+
+
+
+.bike-details {
+  display: flex;
+  flex-wrap: wrap; /* Allow content to wrap to the next row if necessary */
+  justify-content: center;
+  align-items: center;
+}
+
+.color-options {
+  display: flex;
+  flex-direction: column; /* Align color buttons vertically */
+}
+
+@media (max-width: 1162px) {
+    .color-options{
+        display: flex;
+        flex-direction: row;
+    }
+    .color-options button {
+        margin-right: 40px;
+        min-width: 50px;
+        min-height: 50px;
+    }
+    .bike-details-table{
+        margin-bottom: 50px;
+    }
+}
+.color-button {
+  width: 35px;
+  height: 35px;
+  margin: 5px;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+
+.bike-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center contents vertically */
+}
+
+.bike-image-container {
+  max-width: 100%;
+  height: 400px;
+}
+
+/* THIS THIS THIS THIS THIS THIS THIS THIS THSI THSI THSIT */
+.bike-image-container img{
+    min-width: 1056px;
+    min-height: 594px;
+}
+
+.purchase-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.purchase-section button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.bike-details-table {
+  margin-top: 100px;
+  width: 600px;
+  margin-bottom: 50px;
+}
