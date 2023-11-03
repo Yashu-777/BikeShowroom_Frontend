@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {useAuth} from '../context/AuthContext';
 
 function Signup() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const {toggleAuth,toggleTempuser} = useAuth();
 
   const navigate = useNavigate();
 
@@ -19,6 +22,8 @@ function Signup() {
 
       if (response.status === 201) {
         console.log('Registration successful!');
+        toggleTempuser(username);
+        toggleAuth();
         // You can navigate to another page here
         navigate('/payment');
       }

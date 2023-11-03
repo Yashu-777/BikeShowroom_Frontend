@@ -6,14 +6,18 @@ const AuthContext = createContext();
 // Create an AuthProvider component to wrap your app and provide the context value
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  const [tempuser,setTempuser] = useState('');
   // Function to toggle authentication status
   const toggleAuth = () => {
     setIsAuthenticated((prevAuth) => !prevAuth);
   };
 
+  const toggleTempuser = (tempname) => {
+    setTempuser(tempname);
+  }
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, toggleAuth }}>
+    <AuthContext.Provider value={{ isAuthenticated, toggleAuth, tempuser, toggleTempuser }}>
       {children}
     </AuthContext.Provider>
   );

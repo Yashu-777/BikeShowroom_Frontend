@@ -9,7 +9,7 @@ function Login() {
  
   // Create a navigate function to programmatically navigate
   const navigate = useNavigate();
-  const {toggleAuth} = useAuth();
+  const {toggleAuth, toggleTempuser}  = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -26,6 +26,7 @@ function Login() {
         
         // Use toggleAuth with a callback to check the updated isAuthenticated value
         toggleAuth();
+        toggleTempuser(username);
        // console.log(isAuthenticated); // This will log the updated value
         navigate('/payment');
         
