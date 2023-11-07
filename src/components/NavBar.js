@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function NavBar() {
@@ -16,8 +16,15 @@ function NavBar() {
     marginBottom: '60px',
   };
 
-  const { isAuthenticated,tempuser } = useAuth();
-  
+  const {isAuthenticated,tempuser,toggleAuth,toggleTempuser} = useAuth();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.clear();
+    toggleAuth(); // Update the state to reflect the logout
+    toggleTempuser('');
+    navigate('/');
+  }
+
   return (
     <div style={navbarContainer}>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark" style={navbarTop}>
@@ -26,10 +33,12 @@ function NavBar() {
             Bike Showroom
           </Link>
           {isAuthenticated ? (
-            <p className="text-light my-2 my-sm-0">Hello {tempuser}</p>
-
-
-
+            <div>
+              <p className="text-light my-2 my-sm-0">Hello {tempuser}</p>
+              <button className="btn btn-link text-light" onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
           ) : (
             <Link to="/signup" className="btn btn-outline-light my-2 my-sm-0">
               Signup / Login

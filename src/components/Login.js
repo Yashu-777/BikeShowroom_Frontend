@@ -6,37 +6,37 @@ import { useAuth } from '../context/AuthContext';
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
- 
-  // Create a navigate function to programmatically navigate
+
   const navigate = useNavigate();
-  const {toggleAuth, toggleTempuser}  = useAuth();
+  const { toggleAuth, toggleTempuser, isAuthenticated } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
     try {
-      // Send a POST request to the server to authenticate the user
       const response = await axios.post('http://localhost:4000/users/login', {
         username,
         password,
       });
 
       if (response.status === 200) {
-        console.log('Login successful!');
-        
-        // Use toggleAuth with a callback to check the updated isAuthenticated value
+        localStorage.setItem('isAuthenticated', 'true');
+        localStorage.setItem('username', username);
+
         toggleAuth();
         toggleTempuser(username);
-       // console.log(isAuthenticated); // This will log the updated value
         navigate('/payment');
-        
-      } 
-    }catch (error) {
+      }
+    } catch (error) {
       console.error('Error during login:', error);
-      // Handle login errors and provide user feedback, e.g., display an error message
     }
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    toggleAuth(); // Update the state to reflect the logout
+    toggleTempuser('');
+    navigate('/');
+  }
   return (
     <div className="container">
       <div className="row justify-content-center">
@@ -44,33 +44,45 @@ function Login() {
           <div className="card my-4">
             <div className="card-body">
               <h2 className="card-title text-center">Login</h2>
-              <form onSubmit={handleLogin}>
-                <div className="form-group mb-3">
-                  <label>Username:</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                  />
-                </div>
-                <div className="form-group mb-3">
-                  <label>Password:</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  />
-                </div>
-                <div className="d-grid">
-                  <button type="submit" className="btn btn-primary">
-                    Log In
+              {isAuthenticated ? (
+                <div>
+                  <p>You are already logged in. Click the button below to log out.</p>
+                  <button
+                    className="btn btn-primary"
+                    onClick={handleLogout()}
+                  >
+                    Log Out
                   </button>
                 </div>
-              </form>
+              ) : (
+                <form onSubmit={handleLogin}>
+                  <div className="form-group mb-3">
+                    <label>Username:</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                  </div>
+                  <div className="form-group mb-3">
+                    <label>Password:</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </div>
+                  <div className="d-grid">
+                    <button type="submit" className="btn btn-primary">
+                      Log In
+                    </button>
+                  </div>
+                </form>
+              )}
             </div>
           </div>
         </div>

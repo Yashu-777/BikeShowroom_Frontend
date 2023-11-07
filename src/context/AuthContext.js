@@ -5,8 +5,8 @@ const AuthContext = createContext();
 
 // Create an AuthProvider component to wrap your app and provide the context value
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [tempuser,setTempuser] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isAuthenticated'));
+  const [tempuser,setTempuser] = useState(localStorage.getItem('username'));
   // Function to toggle authentication status
   const toggleAuth = () => {
     setIsAuthenticated((prevAuth) => !prevAuth);
