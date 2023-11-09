@@ -1,0 +1,36 @@
+.edit-bike-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .edit-bike-form {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-row {
+    margin: 10px 0;
+  }
+
+  
+  /* Specific label style for the EditBike component */
+  .edit-bike-form label {
+    position: relative; /* Reset the position */
+    top: 0;
+    transform: none; /* Reset the transform */
+  }
+  
+  button {
+    display: block;
+    margin: 20px auto;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  

@@ -7,6 +7,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isAuthenticated'));
   const [tempuser,setTempuser] = useState(localStorage.getItem('username'));
+  const [roles, setRoles] = useState(JSON.parse(localStorage.getItem('roles')) || []);
   // Function to toggle authentication status
   const toggleAuth = () => {
     setIsAuthenticated((prevAuth) => !prevAuth);
@@ -16,8 +17,22 @@ export const AuthProvider = ({ children }) => {
     setTempuser(tempname);
   }
 
+  const setRolesToLocalStorage = (roles) => {
+    localStorage.setItem('roles', JSON.stringify(roles));
+    setRoles(roles);
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, toggleAuth, tempuser, toggleTempuser }}>
+    <AuthContext.Provider
+      value={{
+        isAuthenticated,
+        toggleAuth,
+        tempuser,
+        toggleTempuser,
+        roles,
+        setRoles: setRolesToLocalStorage,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

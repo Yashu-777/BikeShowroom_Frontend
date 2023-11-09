@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function NavBar() {
@@ -16,14 +15,16 @@ function NavBar() {
     marginBottom: '60px',
   };
 
-  const {isAuthenticated,tempuser,toggleAuth,toggleTempuser} = useAuth();
-  const navigate = useNavigate();
+  const {isAuthenticated, tempuser, roles, toggleAuth, toggleTempuser} = useAuth();
+  
   const handleLogout = () => {
     localStorage.clear();
     toggleAuth(); // Update the state to reflect the logout
     toggleTempuser('');
-    navigate('/');
+    window.location.reload();
   }
+
+  const isAdmin = roles.includes('Admin');
 
   return (
     <div style={navbarContainer}>
@@ -33,9 +34,16 @@ function NavBar() {
             Bike Showroom
           </Link>
           {isAuthenticated ? (
-            <div>
-              <p className="text-light my-2 my-sm-0">Hello {tempuser}</p>
-              <button className="btn btn-link text-light" onClick={handleLogout}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              {isAdmin ? (
+                <div style={{display:'flex',alignItems: 'center'}}>
+                   <div><p className="text-light my-2 my-sm-0">Hello {tempuser}</p></div>
+                   <div><Link to='/add-bike' type='button' className='btn btn-danger mx-2'>Add Bike</Link></div>
+                </div>
+              ) : (
+                <p className="text-light my-2 my-sm-0">Hello {tempuser}</p>
+              )}
+              <button className="btn btn-outline-light my-2 my-sm-0" onClick={handleLogout}>
                 Logout
               </button>
             </div>
@@ -48,6 +56,7 @@ function NavBar() {
       </nav>
     </div>
   );
+  
 }
 
 export default NavBar;
