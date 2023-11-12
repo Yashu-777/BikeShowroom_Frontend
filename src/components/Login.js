@@ -43,7 +43,7 @@ function Login() {
     localStorage.clear();
     toggleAuth(); // Update the state to reflect the logout
     toggleTempuser('');
-    window.location().reload();
+    window.location.reload();
   }
 
    return (
@@ -52,7 +52,7 @@ function Login() {
         <div className="signin-content">
           <div className="signin-image">
             <figure>
-              <img src="/images/signin.jpg" alt="signin" />
+              <img src="/images/prof.jpg" alt="signin" />
             </figure>
             <Link to="/signup" className="signup-image-link">
               Create an account

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import {useAuth} from '../context/AuthContext'; // Import your AuthContext
 import { useState,useEffect } from 'react';
 import axios from 'axios';
+import './BikeCarousel'
+import BikeCarousel from './BikeCarousel';
 
 const BikeDetails = ({id}) => {
   // Access the context
@@ -48,8 +50,8 @@ const BikeDetails = ({id}) => {
     }
   }, [id]);
 
-
   return (
+    <div>
     <div className="bike-details-container">
       {bikeDetails && (
         <div className="bike-details">
@@ -78,13 +80,13 @@ const BikeDetails = ({id}) => {
               <img
                 src={bikeDetails[selectedColor]}
                 alt="Bike"
-                style={{ maxWidth: '100%', height: 'auto' }}
+                style={{ maxWidth: '100%', height: '400px' }}
               />
             </div>
             <div className="purchase-section">
               <h4>{bikeDetails.brand} {bikeDetails.model}</h4>
               <h4>Price: ₹ {bikeDetails.price}</h4>
-              <button onClick={handlePurchaseClick} style={{marginBottom: '40px'}}>Purchase Bike</button>
+              <button onClick={handlePurchaseClick} style={{marginBottom: '40px'}}>Purchase Bike</button>
             </div>
           </div>
           <div className="bike-details-table">
@@ -130,11 +132,14 @@ const BikeDetails = ({id}) => {
           </div>
         </div>
       )}
+      
     </div>
-  );
-  
-    
+    <div>
+    <BikeCarousel/>
+    </div>
+    </div>
 
-}
+  );
+};
 
 export default BikeDetails;

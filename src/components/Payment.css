@@ -1,0 +1,38 @@
+.payment-container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .payment-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .custom-label {
+    position: relative;
+    display: inline;
+    font-weight: bold;
+    color: #333; /* Custom label color */
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .unauthenticated-message {
+    margin-top: 20px;
+  }
+  

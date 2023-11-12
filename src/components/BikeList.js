@@ -116,12 +116,12 @@ function BikeList() {
                 <h5 className="card-title">
                   {bike.brand} - {bike.model}
                 </h5>
-                <p className="card-text">Price: ${bike.price}</p>
+                <p className="card-text">Price: ₹ {bike.price}</p>
                 <Link to={`/bikes/${bike._id}`} className="btn btn-primary">
                   View Details
                 </Link>
                 {isAuthenticated && roles.includes('Admin') && (
-                    <Link to={`/bikes/${bike._id}/edit`} className="btn btn-secondary mx-2">
+                    <Link to={`/bikes/${bike._id}/edit`} className="btn btn-secondary my-1 mx-1">
                       Edit
                     </Link>
                 )}

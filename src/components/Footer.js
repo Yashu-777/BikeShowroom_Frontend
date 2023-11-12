@@ -2,8 +2,8 @@ import React from 'react';
 
 function Footer() {
   const footerStyle = {
-    position: 'fixed',
-    bottom: 0,
+    /* position: 'fixed',
+    bottom: 0, */
     width: '100%',
     backgroundColor: '#343a40', // Adjust the background color as needed
     color: 'white',
@@ -17,7 +17,7 @@ function Footer() {
 
   return (
     <div style = {footerContainer}>
-    <footer style={footerStyle}>
+    <footer className='fixed-bottom' style={footerStyle}>
       <p>&copy; {new Date().getFullYear()} Bike Showroom</p>
     </footer>
     </div>

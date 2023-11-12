@@ -119,7 +119,7 @@ function Signup() {
           </div>
           <div className="signup-image">
             <figure>
-              <img src="/images/signup.jpg" alt="signup" />
+              <img src="/images/three.webp" alt="signup" />
             </figure>
             <Link to="/login" className="signup-image-link">
               I am already a member
