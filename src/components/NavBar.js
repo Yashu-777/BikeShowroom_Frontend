@@ -1,38 +1,41 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
 
 function NavBar() {
- /*  const navbarTop = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100%',
-    zIndex: 100,
-  }; */
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { isAuthenticated, tempuser, roles, toggleAuth, toggleTempuser } = useAuth();
+  const navigate = useNavigate();
+  const dropdownRef = useRef(null);
 
-  const navbarContainer = {
-    marginBottom: '60px',
-  };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
 
-  const {isAuthenticated, tempuser, roles, toggleAuth, toggleTempuser} = useAuth();
-  
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   const handleLogout = () => {
     localStorage.clear();
-    toggleAuth(); // Update the state to reflect the logout
+    toggleAuth();
     toggleTempuser('');
     navigate('/');
-  }
+  };
 
   const isAdmin = roles.includes('Admin');
-  const navigate = useNavigate();
 
   return (
-    <div style={navbarContainer}>
-      <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" >
+    <div style={{ marginBottom: '80px' }}>
+      <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%',  }}>
             <div>
               <Link to="/" className="navbar-brand">
                 Bike Showroom
@@ -44,28 +47,41 @@ function NavBar() {
             <div>
               {isAuthenticated ? (
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                  {isAdmin ? (
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      <div>
-                        <p className="text-light my-2 my-sm-0">Hello {tempuser}</p>
-                      </div>
-                      <div>
-                        <Link to="/add-bike" type="button" className="btn btn-danger mx-2">
-                          Add Bike
-                        </Link>
-                      </div>
+                  <div className="dropdown" ref={dropdownRef}>
+                    <button
+                      className="btn btn-secondary dropdown-toggle mx-2"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      onClick={() => setDropdownOpen(!dropdownOpen)}
+                    >
+                      Hello {tempuser}
+                    </button>
+                    <div className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`} aria-labelledby="dropdownMenuButton">
+                      <Link to="/profile" className="dropdown-item" onClick={() => setDropdownOpen(false)}>
+                        Profile
+                      </Link>
                     </div>
-                  ) : (
-                    <p className="text-light mx-2 my-2 my-sm-0">Hello {tempuser}</p>
+                  </div>
+                  {isAdmin && (
+                    <div>
+                      <Link to="/add-bike" className="btn btn-danger mx-2">
+                        Add Bike
+                      </Link>
+                    </div>
                   )}
-                  <button className="btn btn-outline-light my-2 my-sm-0" onClick={handleLogout}>
+                  <button className="btn btn-outline-light my-2 my-sm-0 mx-2" onClick={handleLogout}>
                     Logout
                   </button>
                 </div>
               ) : (
-                <Link to="/signup" className="btn btn-outline-light my-2 my-sm-0">
-                  Signup / Login
-                </Link>
+                <div>
+                  <Link to="/signup" className="btn btn-outline-light my-2 my-sm-0">
+                    Signup / Login
+                  </Link>
+                </div>
               )}
             </div>
           </div>

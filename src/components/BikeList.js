@@ -21,7 +21,7 @@ function BikeList() {
     axios.get('http://localhost:4000/api/bikes')
       .then((res) => {
         setBikes(res.data);
-        console.log('Fetched bikes data:', res.data);
+        console.log('Fetched bikes data');
       })
       .catch((error) => {
         console.error('Error fetching bikes:', error);
@@ -56,22 +56,24 @@ function BikeList() {
   };
 
   const handleDelete = async (bikeId) => {
-    try {
-      // Send a DELETE request to the backend to delete the bike
-      const response = await axios.delete(`http://localhost:4000/api/bikes/${bikeId}`);
-      
-      if (response.status === 200) {
-        // Handle the success case, e.g., show a message or update the list of bikes
-        alert("Deleted successfully :sad: ")
-        console.log('Bike deleted successfully');
-        window.location.reload();
-      } else {
-        // Handle other cases, e.g., show an error message
-        console.error('An error occurred while deleting the bike');
+    if(window.confirm("Confirm delete bike ?")){
+      try {
+        // Send a DELETE request to the backend to delete the bike
+        const response = await axios.delete(`http://localhost:4000/api/bikes/${bikeId}`);
+        
+        if (response.status === 200) {
+          // Handle the success case, e.g., show a message or update the list of bikes
+          alert("Deleted successfully :sad: ")
+          console.log('Bike deleted successfully');
+          window.location.reload();
+        } else {
+          // Handle other cases, e.g., show an error message
+          console.error('An error occurred while deleting the bike');
+        }
+      } catch (error) {
+        console.error('An error occurred while deleting the bike:', error);
+        // Handle errors, e.g., show an error message
       }
-    } catch (error) {
-      console.error('An error occurred while deleting the bike:', error);
-      // Handle errors, e.g., show an error message
     }
   };
 

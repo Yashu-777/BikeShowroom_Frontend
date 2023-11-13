@@ -1,0 +1,70 @@
+/* Add these styles to your existing CSS or create a new CSS file */
+
+.user-profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;    
+    height: 80vh;
+  }
+  
+  .profile-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .current-username {
+    margin-bottom: 20px;
+    font-weight: bolder;
+    font-size: x-large;
+
+  }
+  
+  .update-username-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .new-username-label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    position: static;
+  }
+  
+  .user-profile-form label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .new-username-input {
+    padding: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .update-username-button,
+  .delete-account-button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .delete-account-button {
+    background-color: #dc3545;
+    margin-bottom: 20px;
+  }
+  
+  /* Optional: Add hover effects */
+  .update-username-button:hover,
+  .delete-account-button:hover {
+    background-color: #8b8e92;
+  }
+  
+  

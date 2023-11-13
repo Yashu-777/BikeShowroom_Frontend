@@ -35,6 +35,7 @@ function Login() {
         navigate('/');
       }
     } catch (error) {
+      alert("Incorrect username or password");
       console.error('Error during login:', error);
     }
   };

@@ -9,6 +9,8 @@ import Login from './components/Login';
 import Payment from './components/Payment';
 import EditBike from './components/EditBike';
 import AddBike from './components/AddBike';
+import UserProfile from './components/UserProfile';
+
 import { AuthProvider } from './context/AuthContext'; // Import AuthProvider
 
 function App() {
@@ -25,6 +27,7 @@ function App() {
             <Route path="/payment" element={<Payment />} />
             <Route path="/bikes/:id/edit" element={<EditBike />} />
             <Route path="/add-bike" element={<AddBike/>} />
+            <Route path="/profile" element={<UserProfile/>} />
           </Routes>
           <Footer />
         </AuthProvider>
