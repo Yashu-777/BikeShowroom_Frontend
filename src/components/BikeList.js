@@ -111,7 +111,7 @@ function BikeList() {
 
       <div className="row">
         {bikes.map((bike) => (
-          <div className="col-md-3" key={bike._id}>
+          <div className="col-md-4 col-lg-3" key={bike._id}>
             <div className="card">
               <img src={bike.imageblack} className="card-img-top" alt={bike.brand} />
               <div className="card-body">

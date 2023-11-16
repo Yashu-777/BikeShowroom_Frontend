@@ -4,6 +4,8 @@ import axios from 'axios';
 import {useAuth} from '../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import './login.css'
+
 
 function Signup() {
   const [username, setUsername] = useState('');

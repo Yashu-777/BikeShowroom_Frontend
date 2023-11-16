@@ -35,7 +35,7 @@ function NavBar() {
     <div style={{ marginBottom: '80px' }}>
       <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%',  }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
             <div>
               <Link to="/" className="navbar-brand">
                 Bike Showroom

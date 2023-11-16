@@ -10,6 +10,8 @@ import Payment from './components/Payment';
 import EditBike from './components/EditBike';
 import AddBike from './components/AddBike';
 import UserProfile from './components/UserProfile';
+import RazorpayPayment from './components/RazorpayPayment';
+import SuccessPage from './components/SuccessPage';
 
 import { AuthProvider } from './context/AuthContext'; // Import AuthProvider
 
@@ -28,6 +30,9 @@ function App() {
             <Route path="/bikes/:id/edit" element={<EditBike />} />
             <Route path="/add-bike" element={<AddBike/>} />
             <Route path="/profile" element={<UserProfile/>} />
+            <Route path="/razorpay-payment" element={<RazorpayPayment/>} />
+            <Route path="/success" element={<SuccessPage/>} />
+            
           </Routes>
           <Footer />
         </AuthProvider>
