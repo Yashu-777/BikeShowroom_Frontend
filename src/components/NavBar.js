@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
+// ... (previous imports and code)
+
 function NavBar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { isAuthenticated, tempuser, roles, toggleAuth, toggleTempuser } = useAuth();
@@ -35,7 +37,7 @@ function NavBar() {
     <div style={{ marginBottom: '80px' }}>
       <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
             <div>
               <Link to="/" className="navbar-brand">
                 Bike Showroom
@@ -63,18 +65,30 @@ function NavBar() {
                       <Link to="/profile" className="dropdown-item" onClick={() => setDropdownOpen(false)}>
                         Profile
                       </Link>
+                      {/* Add Bike and Logout options will be hidden by default */}
+                      <div className="d-lg-none">
+                        {isAdmin && (
+                          <Link to="/add-bike" className="dropdown-item">
+                            Add Bike
+                          </Link>
+                        )}
+                        <button className="btn btn-danger btn-outline-light my-2 my-sm-0 mx-2" onClick={handleLogout}>
+                          Logout
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  {isAdmin && (
-                    <div>
+                  {/* Add Bike and Logout options will be visible by default on larger screens */}
+                  <div className="d-none d-lg-flex">
+                    {isAdmin && (
                       <Link to="/add-bike" className="btn btn-danger mx-2">
                         Add Bike
                       </Link>
-                    </div>
-                  )}
-                  <button className="btn btn-outline-light my-2 my-sm-0 mx-2" onClick={handleLogout}>
-                    Logout
-                  </button>
+                    )}
+                    <button className="btn btn-outline-light my-2 my-sm-0 mx-2" onClick={handleLogout}>
+                      Logout
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <div>
@@ -92,3 +106,4 @@ function NavBar() {
 }
 
 export default NavBar;
+

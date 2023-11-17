@@ -1,70 +1,109 @@
-/* Add these styles to your existing CSS or create a new CSS file */
-
+/* Base styles */
 .user-profile-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;    
-    height: 80vh;
-  }
-  
-  .profile-heading {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .current-username {
-    margin-bottom: 20px;
-    font-weight: bolder;
-    font-size: x-large;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 91vh;
+}
 
+.user-profile-content {
+  display: flex;
+  flex-wrap: wrap; /* Allow content to wrap to the next line */
+  max-width: 1000px;
+}
+
+.left-section,
+.right-section {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  margin: 0 10px 20px; /* Add margin for separation */
+}
+
+.left-section {
+  background-color: #c3e1f5;
+  color: #1a3b5a;
+}
+
+.right-section {
+  background-color: #f5c5c5;
+  color: #5a1a1a;
+}
+
+.profile-heading {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.current-username {
+  margin-bottom: 40px;
+  font-weight: bolder;
+  font-size: x-large;
+  text-align: center;
+}
+
+.new-username-label {
+  font-size: 18px;
+  margin-bottom: 10px;
+  position: static;
+}
+
+.new-username-input {
+  padding: 12px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.update-username-button,
+.delete-account-button {
+  padding: 15px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  color: #fff;
+  margin-top: 20px;
+}
+
+/* Hover effects */
+.update-username-button:hover,
+.delete-account-button:hover {
+  opacity: 0.8;
+}
+
+/* Transition effects */
+.user-profile-content,
+.update-username-container,
+.delete-account-container {
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.delete-account-container p{
+  font-size: x-large;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .left-section,
+  .right-section {
+    flex: 100%; /* Make sections take up full width on small screens */
+    margin: 0 0 20px; /* Adjust margin for better spacing */
   }
-  
-  .update-username-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+}
+
+
+/* Larger screens */
+@media (min-width: 1200px) {
+  .left-section,
+  .right-section {
+    padding: 100px; /* Increase padding for larger screens */
   }
-  
-  .new-username-label {
-    font-size: 16px;
-    margin-bottom: 5px;
-    position: static;
-  }
-  
-  .user-profile-form label {
-    display: block;
-    margin-bottom: 8px;
-  }
-  
-  .new-username-input {
-    padding: 8px;
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-  
-  .update-username-button,
-  .delete-account-button {
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  
-  .delete-account-button {
-    background-color: #dc3545;
-    margin-bottom: 20px;
-  }
-  
-  /* Optional: Add hover effects */
-  .update-username-button:hover,
-  .delete-account-button:hover {
-    background-color: #8b8e92;
-  }
-  
-  
+}
