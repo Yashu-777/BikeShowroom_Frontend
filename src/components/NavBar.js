@@ -37,7 +37,7 @@ function NavBar() {
         <div className="container">
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%',maxHeight:'50px' }}>
             <div>
-              <Link to="/" className="navbar-brand d-none d-md">
+              <Link to="/" className="navbar-brand d-none d-md-inline">
                 RadiantRides
               </Link>
               <Link to="/" className="btn btn-outline-light my-2 my-sm-0 mx-2">
