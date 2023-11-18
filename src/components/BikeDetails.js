@@ -57,7 +57,7 @@ const BikeDetails = ({id}) => {
   useEffect(() => {
     if (id) {
       // Fetch bike details based on bikeId from your API
-      axios.get(`https://bikeshowroom-backend.onrender.com/api/bikes/${id}`)
+      axios.get(`https://radiantrides-backend.onrender.com/api/bikes/${id}`)
         .then((response) => {
           setBikeDetails(response.data);
         })

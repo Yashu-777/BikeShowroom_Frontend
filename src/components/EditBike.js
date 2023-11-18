@@ -23,7 +23,7 @@ function EditBike() {
   useEffect(() => {
     if (isAuthenticated && roles.includes('Admin')) {
       axios
-        .get(`https://bikeshowroom-backend.onrender.com/api/bikes/${id}`)
+        .get(`https://radiantrides-backend.onrender.com/api/bikes/${id}`)
         .then((response) => {
           setBike(response.data);
         })

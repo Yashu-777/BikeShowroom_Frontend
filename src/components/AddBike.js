@@ -44,7 +44,7 @@ function AddBike() {
     }
 
     axios
-      .post('https://bikeshowroom-backend.onrender.com/api/bikes', bike) 
+      .post('https://radiantrides-backend.onrender.com/api/bikes', bike) 
       .then((response) => {
         console.log('Bike added:', response.data);
         navigate(`/bikes/${response.data._id}`);

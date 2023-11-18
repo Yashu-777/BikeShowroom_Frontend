@@ -15,7 +15,7 @@ function UserProfile() {
 
   const updateUsername = async () => {
     try {
-      const response = await axios.patch('https://bikeshowroom-backend.onrender.com/users/update', {
+      const response = await axios.patch('https://radiantrides-backend.onrender.com/users/update', {
         username: tempuser,
         newUsername: newUsername,
       });
@@ -33,7 +33,7 @@ function UserProfile() {
 
   const deleteAccount = async () => {
     try {
-      const response = await axios.delete('https://bikeshowroom-backend.onrender.com/users/delete', {
+      const response = await axios.delete('https://radiantrides-backend.onrender.com/users/delete', {
         data: { username: tempuser },
       });
 

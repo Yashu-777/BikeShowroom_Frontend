@@ -18,7 +18,7 @@ function BikeList() {
   const navigate = useNavigate(); 
 
   useEffect(() => {
-    axios.get('https://bikeshowroom-backend.onrender.com/api/bikes')
+    axios.get('https://radiantrides-backend.onrender.com/api/bikes')
       .then((res) => {
         setBikes(res.data);
         console.log("fetched:",res.data);
@@ -70,7 +70,7 @@ function BikeList() {
     if (bikeToDelete) {
       try {
         // Send a DELETE request to the backend to delete the bike
-        const response = await axios.delete(`https://bikeshowroom-backend.onrender.com/api/bikes/${bikeToDelete._id}`);
+        const response = await axios.delete(`https://radiantrides-backend.onrender.com/api/bikes/${bikeToDelete._id}`);
         
         if (response.status === 200) {
           alert('Bike deleted successfully');
