@@ -1,19 +1,16 @@
-// Payment.js
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate,useLocation } from 'react-router-dom';
-import RazorpayPayment from './RazorpayPayment'; // Import the Razorpay component
-import './Payment.css'
+import RazorpayPayment from './RazorpayPayment'; 
+import '../style_components/Payment.css'
 function Payment() {
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   // Access price from location.state
-  const { price, color, brand, model,pic } = location.state || {};
+  const { priceDisp, price, color, brand, model,pic } = location.state || {};
 
-  console.log(color);
   const handlePaymentSuccess = (paymentId) => {
-    // Handle successful payment (e.g., update order status, navigate to success page)
     console.log('Payment successful. Payment ID:', paymentId);
   };
 
@@ -23,11 +20,12 @@ function Payment() {
       <div >
         {isAuthenticated ? (
           <div className="payment-container">
-            <div><img src={pic} alt="bike" /></div>
+            <div><img className="payment-image" src={pic} alt="bike" /></div>
             <div>
               <h3>Brand: {brand}</h3>
               <h3>Model: {model}</h3>
               <h3>Variant : {color}</h3>
+              <h3>Price : ₹ {priceDisp}</h3>
               <RazorpayPayment amount={price} onSuccess={handlePaymentSuccess} />
             </div>
           </div>

@@ -1,7 +1,4 @@
-/* SuccessPage.css */
-
-  
-  .success-container {
+.success-container {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
@@ -11,16 +8,16 @@
     background-color: #fff;
     margin-top: 150px;
     border: double greenyellow
-  }
+}
   
-  .success-heading {
+.success-heading {
     color: #007bff;
     font-size: 36px;
     margin-bottom: 10px;
-  }
+}
   
-  .success-message {
+.success-message {
     color: #4caf50;
     font-size: 24px;
     margin-bottom: 30px;
-  }
+}

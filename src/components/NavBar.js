@@ -2,8 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-// ... (previous imports and code)
-
 function NavBar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { isAuthenticated, tempuser, roles, toggleAuth, toggleTempuser } = useAuth();
@@ -40,7 +38,7 @@ function NavBar() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
             <div>
               <Link to="/" className="navbar-brand">
-                Bike Showroom
+                RadiantRides
               </Link>
               <Link to="/" className="btn btn-outline-light my-2 my-sm-0 mx-2">
                 Home

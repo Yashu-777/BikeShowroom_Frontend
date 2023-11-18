@@ -2,47 +2,47 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import './UserProfile.css';
+import { Modal } from 'react-bootstrap'; 
+import '../style_components/UserProfile.css';
 
 function UserProfile() {
   const { tempuser, isAuthenticated, toggleAuth, toggleTempuser } = useAuth();
   const [newUsername, setNewUsername] = useState('');
+  const [validationMessage, setValidationMessage] = useState('');
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const navigate = useNavigate();
 
   const updateUsername = async () => {
     try {
       const response = await axios.patch('http://localhost:4000/users/update', {
-        username: tempuser, // send the current username
-        newUsername: newUsername, // send the new username
+        username: tempuser,
+        newUsername: newUsername,
       });
 
       if (response.status === 200) {
-        alert('Username updated successfully');
+        setValidationMessage('Username updated successfully');
         toggleTempuser(newUsername);
         toggleAuth();
         navigate('/login');
-        // Optionally update localStorage or any other logic
       }
     } catch (error) {
-      alert('Username is not available');
+      setValidationMessage('Username is not available');
     }
   };
 
   const deleteAccount = async () => {
     try {
       const response = await axios.delete('http://localhost:4000/users/delete', {
-        data: { username: tempuser }, // send the current username
+        data: { username: tempuser },
       });
 
       if (response.status === 200) {
-        localStorage.clear(); // Clear localStorage
-        toggleAuth(); // Log out the user
+        localStorage.clear();
+        toggleAuth();
         toggleTempuser('');
         navigate('/signup');
-        // Optionally perform any other cleanup or redirection
       } else if (response.status === 400) {
-        // Check the response data for the error message
         if (response.data && response.data.error) {
           alert(response.data.error);
         } else {
@@ -55,15 +55,30 @@ function UserProfile() {
   };
 
   const handleUpdateUsername = () => {
+    const usernameRegex = /^[a-zA-Z0-9_]{3,16}$/;
+    if (!usernameRegex.test(newUsername)) {
+      setValidationMessage(
+        'Invalid username. Please use 3-16 characters, only letters, numbers, and underscores.'
+      );
+      return;
+    }
+
     if (newUsername.trim() !== '') {
       updateUsername();
     }
   };
 
   const handleDeleteAccount = () => {
-    if (window.confirm('Are you sure you want to delete your account?')) {
-      deleteAccount();
-    }
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeleteAccount = () => {
+    deleteAccount();
+    setShowDeleteModal(false);
+  };
+
+  const cancelDeleteAccount = () => {
+    setShowDeleteModal(false);
   };
 
   return (
@@ -82,8 +97,14 @@ function UserProfile() {
                 id="new-username"
                 className="new-username-input"
                 value={newUsername}
-                onChange={(e) => setNewUsername(e.target.value)}
+                onChange={(e) => {
+                  setNewUsername(e.target.value);
+                  setValidationMessage(''); 
+                }}
               />
+              {validationMessage && (
+                <div className="validation-message">{validationMessage}</div>
+              )}
               <button className="update-username-button" onClick={handleUpdateUsername}>
                 Update Username
               </button>
@@ -106,6 +127,29 @@ function UserProfile() {
           </Link>
         </div>
       )}
+
+      
+      <Modal show={showDeleteModal} onHide={cancelDeleteAccount}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            Are you sure you want to delete your account?
+          </p>
+          <p className="text-danger font-weight-bold">
+            This action is irreversible and will permanently remove your account and all associated data.
+          </p>
+        </Modal.Body>
+        <Modal.Footer>
+          <button className="btn btn-secondary" onClick={cancelDeleteAccount}>
+            Cancel
+          </button>
+          <button className="btn btn-danger" onClick={confirmDeleteAccount}>
+            Delete Account
+          </button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

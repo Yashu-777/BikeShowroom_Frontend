@@ -15,12 +15,10 @@
     margin: 10px 0;
   }
 
-  
-  /* Specific label style for the EditBike component */
   .edit-bike-form label {
-    position: relative; /* Reset the position */
+    position: relative; 
     top: 0;
-    transform: none; /* Reset the transform */
+    transform: none; 
   }
   
   button {

@@ -1,39 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {Link,useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './style.css';
-import {useAuth} from '../context/AuthContext';
+import '../style_components/style.css';
+import { useAuth } from '../context/AuthContext';
 
 function BikeList() {
   const [bikes, setBikes] = useState([]);
-
   const [searchInput, setSearchInput] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedBike, setSelectedBike] = useState(null);
-  
-  const {isAuthenticated,roles} = useAuth();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [bikeToDelete, setBikeToDelete] = useState(null);
 
-  const navigate = useNavigate(); // Initialize useNavigate
+  const { isAuthenticated, roles } = useAuth();
+  const navigate = useNavigate(); 
 
   useEffect(() => {
-    // Fetch bikes from your backend API
     axios.get('http://localhost:4000/api/bikes')
       .then((res) => {
         setBikes(res.data);
-        console.log('Fetched bikes data');
       })
       .catch((error) => {
         console.error('Error fetching bikes:', error);
       });
   }, []);
 
-
   const handleSearchInputChange = (e) => {
     const { value } = e.target;
     setSearchInput(value);
 
-    // Perform the search and update searchResults here
     const filteredBikes = bikes.filter(
       (bike) =>
         bike.brand.toLowerCase().includes(value.toLowerCase()) ||
@@ -49,35 +46,46 @@ function BikeList() {
   };
 
   const handleSearchButtonClick = () => {
-    // Redirect to the bike details page when the "Search" button is clicked
     if (selectedBike) {
       navigate(`/bikes/${selectedBike._id}`);
     }
   };
 
+  const openDeleteModal = (bike) => {
+    setBikeToDelete(bike);
+    setShowDeleteModal(true);
+  };
+
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
+  };
+
   const handleDelete = async (bikeId) => {
-    if(window.confirm("Confirm delete bike ?")){
+    const bikeToDelete = bikes.find((bike) => bike._id === bikeId);
+    openDeleteModal(bikeToDelete);
+  };
+
+  const confirmDelete = async () => {
+    if (bikeToDelete) {
       try {
         // Send a DELETE request to the backend to delete the bike
-        const response = await axios.delete(`http://localhost:4000/api/bikes/${bikeId}`);
+        const response = await axios.delete(`http://localhost:4000/api/bikes/${bikeToDelete._id}`);
         
         if (response.status === 200) {
-          // Handle the success case, e.g., show a message or update the list of bikes
-          alert("Deleted successfully :sad: ")
+          alert('Bike deleted successfully');
           console.log('Bike deleted successfully');
+          closeDeleteModal();
           window.location.reload();
         } else {
-          // Handle other cases, e.g., show an error message
           console.error('An error occurred while deleting the bike');
         }
       } catch (error) {
         console.error('An error occurred while deleting the bike:', error);
-        // Handle errors, e.g., show an error message
       }
     }
   };
 
- return (
+  return (
     <div>
       <div className="bg-image-container">
         <div className="bg-image" style={{ backgroundImage: `url('/images/bike.jpg')` }}>
@@ -128,7 +136,7 @@ function BikeList() {
                     </Link>
                 )}
                 {isAuthenticated && roles.includes('Admin') && (
-                    <button className="btn btn-danger mx-1" onClick={()=>handleDelete(bike._id)}>
+                    <button className="btn btn-danger mx-1" onClick={() => handleDelete(bike._id)}>
                       Delete
                     </button>
                 )}
@@ -137,6 +145,42 @@ function BikeList() {
           </div>
         ))}
       </div>
+
+      <Modal
+        show={showDeleteModal}
+        onHide={closeDeleteModal}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>
+            You are about to delete the following bike from the list:
+          </p>
+          <div className="text-center">
+            <strong>{bikeToDelete?.brand} - {bikeToDelete?.model}</strong>
+          </div>
+          <p>
+            If you proceed, all associated data and information related to this bike will be lost.
+          </p>
+          <p className="text-danger font-weight-bold">
+            Are you certain you want to delete this bike?
+          </p>
+        </Modal.Body>
+
+
+        <Modal.Footer>
+          <button className="btn btn-secondary" onClick={closeDeleteModal}>
+            Cancel
+          </button>
+          <button className="btn btn-danger" onClick={confirmDelete}>
+            Delete
+          </button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

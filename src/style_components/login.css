@@ -563,3 +563,12 @@
       margin-right: 0px;
       margin-bottom: 10px; } }
   
+     
+
+.error-label {
+  top: 30%;
+}
+
+.error-message{
+  color:red
+}

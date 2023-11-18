@@ -1,10 +1,7 @@
-// RazorpayPayment.js
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 
 const RazorpayPayment = ({ amount, onSuccess }) => {
-  const [paymentId, setPaymentId] = useState(null);
-
   const handlePayment = async () => {
     try {
       // Make an API request to your backend to create a Razorpay order
@@ -12,17 +9,15 @@ const RazorpayPayment = ({ amount, onSuccess }) => {
         amount: amount * 100, // Razorpay expects amount in paisa
       });
       console.log('Razorpay Order API Response:', response.data);
-      const { orderId, options } = response.data;
-
-      console.log('Order ID:', orderId);
-      console.log('Options:', options);
+      const { options } = response.data;
 
       const razorpay = new window.Razorpay(options);
-      console.log('Razorpay instance created');
+
+      
+      razorpay.open();
 
       razorpay.on('payment.success', (response) => {
-        console.log('Payment success callback triggered:', response);
-        setPaymentId(response.razorpay_payment_id);
+        console.log('Payment success');
         onSuccess(response.razorpay_payment_id);
       });
 
@@ -30,8 +25,6 @@ const RazorpayPayment = ({ amount, onSuccess }) => {
         console.error('Payment failed:', error);
       });
 
-      razorpay.open();
-      console.log('Razorpay dialog opened');
       
     } catch (error) {
       console.error('Error creating Razorpay order:', error);
@@ -41,7 +34,6 @@ const RazorpayPayment = ({ amount, onSuccess }) => {
   return (
     <div>
       <button onClick={handlePayment}>Pay Now</button>
-      {paymentId && <p>Payment successful. Payment ID: {paymentId}</p>}
     </div>
   );
 };

@@ -4,11 +4,12 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
-import './login.css'
+import '../style_components/login.css';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
   const { toggleAuth, toggleTempuser, isAuthenticated, setRoles } = useAuth();
@@ -22,12 +23,12 @@ function Login() {
       });
 
       if (response.status === 200) {
-        const {roles} = response.data;
-        
+        const { roles } = response.data;
+
         localStorage.setItem('isAuthenticated', 'true');
         localStorage.setItem('username', username);
 
-        if (roles){
+        if (roles) {
           setRoles(roles);
         }
 
@@ -36,19 +37,30 @@ function Login() {
         navigate('/');
       }
     } catch (error) {
-      alert("Incorrect username or password");
-      console.error('Error during login:', error);
+      setError('Incorrect username or password');
     }
+  };
+
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+    setError('');
+  };
+  
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setError('');
   };
 
   const handleLogout = () => {
     localStorage.clear();
-    toggleAuth(); // Update the state to reflect the logout
+    toggleAuth();
     toggleTempuser('');
     window.location.reload();
-  }
+  };
 
-   return (
+
+  return (
     <section className="sign-in">
       <div className="container2">
         <div className="signin-content">
@@ -65,55 +77,64 @@ function Login() {
             <h2 className="form-title">Login</h2>
 
             {isAuthenticated ? (
-                <div>
-                  <p>You are already logged in. Click the button below to log out.</p>
-                  <button
-                    className="btn btn-primary"
-                    onClick={handleLogout}
-                  >
-                    Log Out
-                  </button>
+              <div>
+                <p>You are already logged in. Click the button below to log out.</p>
+                <button className="btn btn-primary" onClick={handleLogout}>
+                  Log Out
+                </button>
+              </div>
+            ) : (
+              <form
+                method="POST"
+                className="register-form"
+                id="login-form"
+                onSubmit={handleLogin}
+              >
+                <div className="form-group">
+                  <label>
+                    <FontAwesomeIcon icon={faUser} />
+                  </label>
+                  <input
+                    type="name"
+                    name="your_name"
+                    id="your_name"
+                    placeholder="Username"
+                    value={username}
+                    onChange={handleUsernameChange}
+                  />
                 </div>
-              ) : (
-            <form method="POST" className="register-form" id="login-form" onSubmit={handleLogin}>
-              <div className="form-group">
-                <label>
-                <FontAwesomeIcon icon={faUser} />
-                </label>
-                <input
-                  type="name"
-                  name="your_name"
-                  id="your_name"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </div>
-              <div className="form-group">
-                <label>
-                <FontAwesomeIcon icon={faLock} />
-                </label>
-                <input
-                  type="password"
-                  name="your_pass"
-                  id="your_pass"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              
-              <div className="form-group form-button">
-                <input type="submit" name="signin" id="signin" className="form-submit" value="Log in" />
-              </div>
-            </form>
-              )}
+                <div className="form-group">
+                  <label>
+                    <FontAwesomeIcon icon={faLock} />
+                  </label>
+                  <input
+                    type="password"
+                    name="your_pass"
+                    id="your_pass"
+                    placeholder="Password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                  />
+                </div>
+
+                {error && <div className="error-message">{error}</div>}
+
+                <div className="form-group form-button">
+                  <input
+                    type="submit"
+                    name="signin"
+                    id="signin"
+                    className="form-submit"
+                    value="Log in"
+                  />
+                </div>
+              </form>
+            )}
           </div>
         </div>
       </div>
     </section>
   );
 }
-
 
 export default Login;

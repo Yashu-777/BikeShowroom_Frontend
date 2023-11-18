@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem('isAuthenticated'));
   const [tempuser,setTempuser] = useState(localStorage.getItem('username'));
   const [roles, setRoles] = useState(JSON.parse(localStorage.getItem('roles')) || []);
-  // Function to toggle authentication status
+  
   const toggleAuth = () => {
     setIsAuthenticated((prevAuth) => !prevAuth);
   };

@@ -1,19 +1,19 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import {useAuth} from '../context/AuthContext'; // Import your AuthContext
+import {useAuth} from '../context/AuthContext'; 
 import { useState,useEffect } from 'react';
 import axios from 'axios';
 import './BikeCarousel'
 import BikeCarousel from './BikeCarousel';
-import './BikeDetails.css'
+import '../style_components/BikeDetails.css'
 
 const BikeDetails = ({id}) => {
-  // Access the context
+  
   const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const [selectedColor, setSelectedColor] = useState('imageblack');
-  const [selectedAngle, setSelectedAngle] = useState('imageblack'); // Default angle
+  const [selectedAngle, setSelectedAngle] = useState('imageblack'); 
   const [bikeDetails, setBikeDetails] = useState(null);
 
 
@@ -27,28 +27,27 @@ const BikeDetails = ({id}) => {
   };
 
   const handleMouseOut = () => {
-    // Reset selectedAngle to the default value when the mouse leaves the color buttons container
     setSelectedAngle("imageblack");
   };
   
-  // Function to handle the "Purchase Bike" button click
+
   const handlePurchaseClick = () => {
-    // Check if the user is authenticated using the context state
+    
     if (isAuthenticated) {
-      // User is authenticated, you can proceed with the bike purchase logic
+
       const colorPrefix = selectedColor.startsWith("image") ? "" : "image";
       
       navigate('/payment', {
         state: {
+          priceDisp: bikeDetails.price,
           price: parseInt(bikeDetails.price.replace(/,/g, '')),
-          color: selectedColor,
+          color: selectedColor.replace(/^image/, '').replace(/^\w/, c => c.toUpperCase()),
           brand: bikeDetails.brand,
           model: bikeDetails.model,
           pic: bikeDetails[colorPrefix + selectedColor],
         },
       });
     } else {
-      // User is not authenticated, navigate to the Signup page
       navigate('/signup');
     }
   };
@@ -70,7 +69,6 @@ const BikeDetails = ({id}) => {
 
   
   useEffect(() => {
-    // Update the bikeDetails state when it changes
     setBikeDetails(bikeDetails);
   }, [bikeDetails]);
   
@@ -106,7 +104,6 @@ const BikeDetails = ({id}) => {
 
 
             <div className="bike-options">
-              {/* Bike image */}
 
             <div className="bike-image-container">
               {bikeDetails && (
@@ -117,7 +114,6 @@ const BikeDetails = ({id}) => {
               )}
             </div>
 
-              {/* Purchase section */}
               
                 
               <div className="angle-options" onMouseOut={handleMouseOut}>
@@ -148,7 +144,7 @@ const BikeDetails = ({id}) => {
               <thead>
                 <tr>
                   <th>Attribute</th>
-                  <th>Value</th>
+                  <th>Specification</th>
                 </tr>
               </thead>
               <tbody>
@@ -162,23 +158,23 @@ const BikeDetails = ({id}) => {
                 </tr>
                 <tr>
                   <td>Mileage</td>
-                  <td>{bikeDetails.mileage}</td>
+                  <td>{bikeDetails.mileage} kmpl</td>
                 </tr>
                 <tr>
-                  <td>Weight</td>
-                  <td>{bikeDetails.weight}</td>
+                  <td>Kerb Weight</td>
+                  <td>{bikeDetails.weight} kg</td>
                 </tr>
                 <tr>
                   <td>Engine Capacity</td>
-                  <td>{bikeDetails.EngineCapacity}</td>
+                  <td>{bikeDetails.EngineCapacity} cc</td>
                 </tr>
                 <tr>
                   <td>Fuel Tank Capacity</td>
-                  <td>{bikeDetails.FuelTankCapacity}</td>
+                  <td>{bikeDetails.FuelTankCapacity} litres</td>
                 </tr>
                 <tr>
                   <td>Seat Height</td>
-                  <td>{bikeDetails.SeatHeight}</td>
+                  <td>{bikeDetails.SeatHeight} mm</td>
                 </tr>
               </tbody>
             </table>

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './EditBike.css';
+import '../style_components/EditBike.css';
 import {useAuth} from '../context/AuthContext';
 
 function AddBike() {
   const navigate = useNavigate();
   const {isAuthenticated,roles} = useAuth();
-  // Define the initial state for the new bike
+
   const initialBikeState = {
     brand: '',
     model: '',
@@ -19,33 +19,38 @@ function AddBike() {
     SeatHeight: 0,
     imageblack: '',
     imageblue: '',
-    imagered: '',
+    imagered:'',
+    image1: '',
+    image2: '',
+    image3: '',
   };
 
   const [bike, setBike] = useState(initialBikeState);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  // Function to handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setBike({ ...bike, [name]: value });
   };
 
-  // Function to handle the form submission
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    // Make a POST request to add the new bike
+    for (const key in bike) {
+      if (!bike[key]) {
+        setErrorMessage('Please fill in all fields');
+        return;
+      }
+    }
+
     axios
-      .post('http://localhost:4000/api/bikes', bike) // Adjust the API endpoint
+      .post('http://localhost:4000/api/bikes', bike) 
       .then((response) => {
         console.log('Bike added:', response.data);
-        alert("Added !!");
-        // Redirect to the bike details page after a successful add
         navigate(`/bikes/${response.data._id}`);
       })
       .catch((error) => {
         console.error('Error adding bike:', error);
-        // Handle errors, e.g., show an error message
       });
   };
 
@@ -86,7 +91,7 @@ function AddBike() {
           />
         </div>
         <div className="form-row">
-          <label htmlFor="mileage">Mileage</label>
+          <label htmlFor="mileage">Mileage (kmpl) </label>
           <input
             type="number"
             id="mileage"
@@ -96,7 +101,7 @@ function AddBike() {
           />
         </div>
         <div className="form-row">
-          <label htmlFor="weight">Weight</label>
+          <label htmlFor="weight">Weight (kg)</label>
           <input
             type="number"
             id="weight"
@@ -106,7 +111,7 @@ function AddBike() {
           />
         </div>
         <div className="form-row">
-          <label htmlFor="EngineCapacity">Engine Capacity</label>
+          <label htmlFor="EngineCapacity">Engine Capacity (cc)</label>
           <input
             type="text"
             id="EngineCapacity"
@@ -116,7 +121,7 @@ function AddBike() {
           />
         </div>
         <div className="form-row">
-          <label htmlFor="FuelTankCapacity">Fuel Tank Capacity</label>
+          <label htmlFor="FuelTankCapacity">Fuel Tank Capacity (litres)</label>
           <input
             type="text"
             id="FuelTankCapacity"
@@ -126,7 +131,7 @@ function AddBike() {
           />
         </div>
         <div className="form-row">
-          <label htmlFor="SeatHeight">Seat Height</label>
+          <label htmlFor="SeatHeight">Seat Height (mm)</label>
           <input
             type="number"
             id="SeatHeight"
@@ -165,7 +170,41 @@ function AddBike() {
             onChange={handleInputChange}
           />
         </div>
+
+        <div className="form-row">
+          <label htmlFor="image1">Image (Angle 1)</label>
+          <input
+            type="text"
+            id="image1"
+            name="image1"
+            value={bike.image1}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-row">
+          <label htmlFor="image2">Image (Angle 2)</label>
+          <input
+            type="text"
+            id="image2"
+            name="image2"
+            value={bike.image2}
+            onChange={handleInputChange}
+          />
+        </div>
+        <div className="form-row">
+          <label htmlFor="image3">Image (Angle 3)</label>
+          <input
+            type="text"
+            id="image3"
+            name="image3"
+            value={bike.image3}
+            onChange={handleInputChange}
+          />
+        </div>
+        
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <button type="submit">Add Bike</button>
+        
       </form>
     </div>
     ) : (

@@ -5,7 +5,7 @@ function Footer() {
     /* position: 'fixed',
     bottom: 0, */
     width: '100%',
-    backgroundColor: '#343a40', // Adjust the background color as needed
+    backgroundColor: '#343a40',
     color: 'white',
     textAlign: 'center',
     padding: '10px',
@@ -18,7 +18,7 @@ function Footer() {
   return (
     <div style = {footerContainer}>
     <footer className='fixed-bottom' style={footerStyle}>
-      <p>&copy; {new Date().getFullYear()} Bike Showroom</p>
+      <p>&copy; {new Date().getFullYear()} RadiantRides</p>
     </footer>
     </div>
   );

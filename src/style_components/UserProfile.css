@@ -1,4 +1,4 @@
-/* Base styles */
+
 .user-profile-container {
   display: flex;
   align-items: center;
@@ -8,7 +8,7 @@
 
 .user-profile-content {
   display: flex;
-  flex-wrap: wrap; /* Allow content to wrap to the next line */
+  flex-wrap: wrap; 
   max-width: 1000px;
 }
 
@@ -22,7 +22,7 @@
   align-items: center;
   border: 2px solid #ddd;
   border-radius: 10px;
-  margin: 0 10px 20px; /* Add margin for separation */
+  margin: 0 10px 20px; 
 }
 
 .left-section {
@@ -72,13 +72,11 @@
   margin-top: 20px;
 }
 
-/* Hover effects */
 .update-username-button:hover,
 .delete-account-button:hover {
   opacity: 0.8;
 }
 
-/* Transition effects */
 .user-profile-content,
 .update-username-container,
 .delete-account-container {
@@ -90,20 +88,27 @@
   font-size: x-large;
 }
 
-/* Responsive styles */
+
 @media (max-width: 768px) {
   .left-section,
   .right-section {
-    flex: 100%; /* Make sections take up full width on small screens */
-    margin: 0 0 20px; /* Adjust margin for better spacing */
+    flex: 100%; 
+    margin: 0 0 20px; 
   }
+  .left-section{
+    margin-top: 40px;
+  }
+
 }
 
 
-/* Larger screens */
 @media (min-width: 1200px) {
   .left-section,
   .right-section {
-    padding: 100px; /* Increase padding for larger screens */
+    padding: 100px; 
   }
+}
+
+.validation-message{
+  color:red
 }

@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
-import './slick-slider.css';
+import '../style_components/slick-slider.css';
 
 const BikeCarousel = () => {
   const [allBikes, setAllBikes] = useState([]);
@@ -21,7 +21,7 @@ const BikeCarousel = () => {
       });
   }, []);
 
-  // Custom arrow components
+
   const NextArrow = (props) => (
     <div className="slick-arrow slick-next" onClick={props.onClick}>
       <i className="fa fa-angle-right" />
@@ -34,7 +34,6 @@ const BikeCarousel = () => {
     </div>
   );
 
-  // Slider settings
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -65,7 +64,15 @@ const BikeCarousel = () => {
 
   return (
     <div className="bike-carousel">
-      <h2>Other Bikes</h2>
+    <h2 style={{
+      marginBottom: "10px",
+      marginTop: "15px",
+      marginLeft: "20px",
+    }}>
+      Discover Other Bikes
+    </h2>
+
+
       <Slider {...sliderSettings}>
         {allBikes.map((bike) => (
           <div key={bike._id}>

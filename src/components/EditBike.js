@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
-import './EditBike.css';
+import '../style_components/EditBike.css';
 
 function EditBike() {
   const { isAuthenticated, roles } = useAuth();
@@ -12,12 +12,12 @@ function EditBike() {
   const [bike, setBike] = useState({
     brand: '',
     model: '',
-    price: '', // You mentioned that price is of type String in your schema
-    mileage: 0, // Assuming mileage is a number
-    weight: 0, // Assuming weight is a number
-    EngineCapacity: '', // You mentioned that EngineCapacity is of type String
-    FuelTankCapacity: '', // You mentioned that FuelTankCapacity is of type String
-    SeatHeight: 0, // Assuming seatHeight is a number
+    price: '', 
+    mileage: 0, 
+    weight: 0,
+    EngineCapacity: '',
+    FuelTankCapacity: '',
+    SeatHeight: 0, 
   });
 
   useEffect(() => {
@@ -29,10 +29,8 @@ function EditBike() {
         })
         .catch((error) => {
           console.error('Error fetching bike details:', error);
-          // Handle errors, e.g., show an error message or redirect
         });
     } else {
-      // Handle unauthorized access, e.g., show a message or redirect
       navigate('/');
     }
   }, [id, isAuthenticated, navigate, roles]);
@@ -54,7 +52,6 @@ function EditBike() {
       })
       .catch((error) => {
         console.error('Error updating bike details:', error);
-        // Handle errors, e.g., show an error message
       });
   };
 
@@ -91,7 +88,7 @@ function EditBike() {
         <div className="form-row">
           <label htmlFor="price">Price</label>
           <input
-            type="text" // Change the input type if necessary
+            type="text" 
             id="price"
             name="price"
             value={bike.price}
@@ -100,9 +97,9 @@ function EditBike() {
         </div>
 
         <div className="form-row">
-          <label htmlFor="mileage">Mileage</label>
+          <label htmlFor="mileage">Mileage (kmpl)</label>
           <input
-            type="number" // Assuming mileage is a number
+            type="number" 
             id="mileage"
             name="mileage"
             value={bike.mileage}
@@ -111,9 +108,9 @@ function EditBike() {
         </div>
 
         <div className="form-row">
-          <label htmlFor="weight">Weight</label>
+          <label htmlFor="weight">Weight (kg)</label>
           <input
-            type="number" // Assuming weight is a number
+            type="number" 
             id="weight"
             name="weight"
             value={bike.weight}
@@ -122,7 +119,7 @@ function EditBike() {
         </div>
 
         <div className="form-row">
-          <label htmlFor="EngineCapacity">Engine Capacity</label>
+          <label htmlFor="EngineCapacity">Engine Capacity (cc)</label>
           <input
             type="text"
             id="EngineCapacity"
@@ -133,7 +130,7 @@ function EditBike() {
         </div>
 
         <div className="form-row">
-          <label htmlFor="FuelTankCapacity">Fuel Tank Capacity</label>
+          <label htmlFor="FuelTankCapacity">Fuel Tank Capacity (litres)</label>
           <input
             type="text"
             id="FuelTankCapacity"
@@ -144,9 +141,9 @@ function EditBike() {
         </div>
 
         <div className="form-row">
-          <label htmlFor="SeatHeight">Seat Height</label>
+          <label htmlFor="SeatHeight">Seat Height (mm)</label>
           <input
-            type="number" // Assuming seatHeight is a number
+            type="number"
             id="SeatHeight"
             name="SeatHeight"
             value={bike.SeatHeight}
