@@ -35,9 +35,9 @@ function NavBar() {
     <div style={{ marginBottom: '80px' }}>
       <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div className="container">
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%',maxHeight:'50px' }}>
             <div>
-              <Link to="/" className="navbar-brand">
+              <Link to="/" className="navbar-brand d-none d-md">
                 RadiantRides
               </Link>
               <Link to="/" className="btn btn-outline-light my-2 my-sm-0 mx-2">
