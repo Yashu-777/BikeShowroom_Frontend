@@ -23,7 +23,7 @@ function EditBike() {
   useEffect(() => {
     if (isAuthenticated && roles.includes('Admin')) {
       axios
-        .get(`http://localhost:4000/api/bikes/${id}`)
+        .get(`https://bikeshowroom-backend.onrender.com/api/bikes/${id}`)
         .then((response) => {
           setBike(response.data);
         })
@@ -44,7 +44,7 @@ function EditBike() {
     e.preventDefault();
 
     axios
-      .put(`http://localhost:4000/api/bikes/${id}`, bike)
+      .put(`https://bikeshowroom-backend.onrender.com/api/bikes/${id}`, bike)
       .then((response) => {
         console.log('Bike details updated:', response.data);
         navigate(`/bikes/${id}`);

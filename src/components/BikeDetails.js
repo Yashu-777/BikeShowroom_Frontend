@@ -57,7 +57,7 @@ const BikeDetails = ({id}) => {
   useEffect(() => {
     if (id) {
       // Fetch bike details based on bikeId from your API
-      axios.get(`http://localhost:4000/api/bikes/${id}`)
+      axios.get(`https://bikeshowroom-backend.onrender.com/api/bikes/${id}`)
         .then((response) => {
           setBikeDetails(response.data);
         })

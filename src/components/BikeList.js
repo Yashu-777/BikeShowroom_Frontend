@@ -18,9 +18,10 @@ function BikeList() {
   const navigate = useNavigate(); 
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/bikes')
+    axios.get('https://bikeshowroom-backend.onrender.com/api/bikes')
       .then((res) => {
         setBikes(res.data);
+        console.log("fetched:",res.data);
       })
       .catch((error) => {
         console.error('Error fetching bikes:', error);
@@ -69,7 +70,7 @@ function BikeList() {
     if (bikeToDelete) {
       try {
         // Send a DELETE request to the backend to delete the bike
-        const response = await axios.delete(`http://localhost:4000/api/bikes/${bikeToDelete._id}`);
+        const response = await axios.delete(`https://bikeshowroom-backend.onrender.com/api/bikes/${bikeToDelete._id}`);
         
         if (response.status === 200) {
           alert('Bike deleted successfully');

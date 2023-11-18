@@ -12,7 +12,7 @@ const BikeCarousel = () => {
   useEffect(() => {
     // Fetch all bikes for the carousel
     axios
-      .get('http://localhost:4000/api/bikes')
+      .get('https://bikeshowroom-backend.onrender.com/api/bikes')
       .then((response) => {
         setAllBikes(response.data);
       })

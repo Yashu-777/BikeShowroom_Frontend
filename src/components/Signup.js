@@ -45,7 +45,7 @@ function Signup() {
         return;
       }
 
-      const response = await axios.post('http://localhost:4000/users/register', {
+      const response = await axios.post('https://bikeshowroom-backend.onrender.com/users/register', {
         username,
         email,
         password,

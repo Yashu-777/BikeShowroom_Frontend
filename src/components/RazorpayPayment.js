@@ -5,7 +5,7 @@ const RazorpayPayment = ({ amount, onSuccess }) => {
   const handlePayment = async () => {
     try {
       // Make an API request to your backend to create a Razorpay order
-      const response = await axios.post('http://localhost:4000/api/orders', {
+      const response = await axios.post('https://bikeshowroom-backend.onrender.com/api/orders', {
         amount: amount * 100, // Razorpay expects amount in paisa
       });
       console.log('Razorpay Order API Response:', response.data);

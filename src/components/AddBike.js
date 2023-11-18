@@ -44,7 +44,7 @@ function AddBike() {
     }
 
     axios
-      .post('http://localhost:4000/api/bikes', bike) 
+      .post('https://bikeshowroom-backend.onrender.com/api/bikes', bike) 
       .then((response) => {
         console.log('Bike added:', response.data);
         navigate(`/bikes/${response.data._id}`);
